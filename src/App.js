@@ -4,36 +4,44 @@ import "./App.css";
 function App() {
   // State
   let [amount, setAmount] = useState(0);
-  let [tips, setTips] = useState(0);
+  let [tips1, setTips1] = useState(0);
+  let [tips2, setTips2] = useState(0);
 
   // Handler
   function billHandle(amount) {
     setAmount(amount);
   }
 
-  function tipHandle(tips) {
-    setTips((crr) => {
-      return Number(crr) + Number(tips);
-    });
+  function tipHandle1(tips) {
+    setTips1(tips);
   }
+
+  function tipHandle2(tips) {
+    setTips2(tips);
+  }
+
+  // Derive State
+
+  const totaltip = Number(tips1) + Number(tips2);
 
   function clearHandle() {
     setAmount(0);
-    setTips(0);
+    setTips1(0);
+    setTips2(0);
   }
 
   return (
     <div className="container">
       <Bill amount={amount} handleData={billHandle}></Bill>
-      <Service handleTip={tipHandle}>How did you like the service?</Service>
-      <Service handleTip={tipHandle}>
+      <Service handleTip={tipHandle1}>How did you like the service?</Service>
+      <Service handleTip={tipHandle2}>
         How did your friend like the service?
       </Service>
 
       <p>
-        You pay <span>£{Number(amount) + Number(amount * tips)}</span>{" "}
+        You pay <span>£{Number(amount) + Number(amount * totaltip)}</span>{" "}
         <span>
-          (£{amount}+ £{amount * tips} tip)
+          (£{amount}+ £{amount * totaltip} tip)
         </span>
       </p>
 
